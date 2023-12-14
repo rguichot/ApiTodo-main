@@ -1,0 +1,24 @@
+Pour initier un nouveau projet de type API web dans un répertoire ApiUniversity existant
+
+git init
+dotnet new webapi -n ApiUniversity --framework net6.0 -o .
+dotnet new gitignore
+
+Ajouter les packages relatifs à Entity framework
+
+dotnet tool install --global dotnet-ef --version 6.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0.0
+
+Migration
+
+> Pour créer une migration
+dotnet ef migrations add InitialCreate
+
+> Pour appliquer une migration
+dotnet ef database update
+
+> Pour accéder au swagger: https://localhost:7044/swagger/index.html 
+
+> Si vous rencontrez des problèmes de certifications, essayer d’exécuter la commande suivante: dotnet dev-certs https
+
