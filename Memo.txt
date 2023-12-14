@@ -1,16 +1,32 @@
-Pour initier un nouveau projet de type API web dans un répertoire ApiUniversity existant
+-- Problème de certificat --
+
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
+
+-- Pour initier un nouveau projet de type API web dans un répertoire ApiUniversity existant -- 
 
 git init
 dotnet new webapi -n ApiUniversity --framework net6.0 -o .
 dotnet new gitignore
 
-Ajouter les packages relatifs à Entity framework
+-- Ajouter les packages relatifs à Entity framework --
 
 dotnet tool install --global dotnet-ef --version 6.0.0
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.0
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0.0
 
-Migration
+-- Ajout en BDD --
+
+Dans le Program.cs : 
+  SeedData.Init();     (ou une autre fonction dans le cas de plusieurs remplissement)
+
+-- Création API --
+
+Dans le Program.cs : 
+   Injectez le contexte de la base de données dans le service avant d'initialiser l’application avec : 
+                builder.Services.AddDbContext<TodoContext>();
+
+-- Migration --
 
 > Pour créer une migration
 dotnet ef migrations add InitialCreate
@@ -18,7 +34,10 @@ dotnet ef migrations add InitialCreate
 > Pour appliquer une migration
 dotnet ef database update
 
-> Pour accéder au swagger: https://localhost:7044/swagger/index.html 
+-- Accéder au swagger: https://localhost:7044/swagger/index.html --
 
-> Si vous rencontrez des problèmes de certifications, essayer d’exécuter la commande suivante: dotnet dev-certs https
+
+
+
+
 
