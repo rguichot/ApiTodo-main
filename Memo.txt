@@ -1,13 +1,30 @@
+-- Extensions --
+
+C#
+C# Dev Kit
+CSharpier
+SQLite Viewer
+PlantUML
+
+
+
 -- Problème de certificat --
 
 dotnet dev-certs https --clean
 dotnet dev-certs https --trust
 
+
+
+
 -- Pour initier un nouveau projet de type API web dans un répertoire ApiUniversity existant -- 
 
+Créer le dossier avec le nom de projet
+cd nom_du_Projet
 git init
-dotnet new webapi -n ApiUniversity --framework net6.0 -o .
+dotnet new webapi -n nom_du_Projet --framework net6.0 -o .
 dotnet new gitignore
+
+
 
 -- Ajouter les packages relatifs à Entity framework --
 
@@ -15,16 +32,17 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.0
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0.0
 
--- Ajout en BDD --
 
-Dans le Program.cs : 
-  SeedData.Init();     (ou une autre fonction dans le cas de plusieurs remplissement)
 
--- Création API --
+-- Création du modèle --
 
-Dans le Program.cs : 
-   Injectez le contexte de la base de données dans le service avant d'initialiser l’application avec : 
-                builder.Services.AddDbContext<TodoContext>();
+  Créer le Repository "Models" dans lequel il y aura nos modèles objet
+
+  Créer le Repository "Data" dans lequel il y aura : 
+          - Le context pour la BDD
+          - SeedData.cs (où on fait tous les ajouts pour la BDD)
+
+
 
 -- Migration --
 
@@ -34,7 +52,28 @@ dotnet ef migrations add InitialCreate
 > Pour appliquer une migration
 dotnet ef database update
 
--- Accéder au swagger: https://localhost:7044/swagger/index.html --
+
+
+  DANS LE Program.cs (pour lancer l'ajout en BDD) : 
+          - SeedData.Init();     (ou une autre fonction dans le cas de plusieurs remplissement)
+
+
+
+
+
+  -- AVANT DE LANCER L'API !!! --
+
+          Dans le Program.cs : 
+                   Injectez le contexte de la base de données dans le service avant d'initialiser l’application avec : 
+
+                                        builder.Services.AddDbContext<TodoContext>();
+
+
+
+
+-- Accéder au swagger --
+
+https://localhost:7044/swagger/index.html 
 
 
 
