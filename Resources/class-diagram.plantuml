@@ -1,0 +1,15 @@
+@startuml
+class Todo {
+ Id: Integer
+ Task: string
+ Completed: bool
+ Deadline: DateTime?
+}
+
+class List {
+ Id: Integer
+ Name: string
+}
+
+List "0..1" <--> "0..*" Todo: contains
+@enduml
